@@ -1,0 +1,1539 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>영남이공대학교 포털시스템</title>
+    <meta
+      id="_csrf"
+      name="_csrf"
+      content="8a7c4a9e-aa63-4635-b37e-eeb06305e710"
+    />
+    <meta id="_csrf_header" name="_csrf_header" content="X-CSRF-TOKEN" />
+    <meta charset="utf-8" />
+    <meta name="description" content="영남이공대학교포털" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+    />
+    <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8" />
+    <meta http-equiv="CONTENT-LANGUAGE" content="ko-KR" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="Content-Script-Type" content="text/javascript" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta http-equiv="Expires" content="-1" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Cache-Control" content="no-cache" />
+
+    <!-- 		<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script> -->
+    <!-- 		<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.min.js"></script> -->
+    <script
+      type="text/javascript"
+      src="https://yportal.ync.ac.kr/js/lib/cdn/chart_min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://yportal.ync.ac.kr/js/lib/cdn/babel_min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://yportal.ync.ac.kr/js/lib/jquery-3.6.0/jquery-3.6.0.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://yportal.ync.ac.kr/js/lib/jquery-ui-1.13.0/jquery-ui.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://yportal.ync.ac.kr/js/lib/jsrender-0.9.91/jsrender.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://yportal.ync.ac.kr/js/lib/alasql-0.4.11/alasql.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://yportal.ync.ac.kr/js/common/webViewBridge/webViewBridge.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://yportal.ync.ac.kr/js/common/lodash/lodash.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://yportal.ync.ac.kr/js/common/alert/commonAlert.js?ver=20220626"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://yportal.ync.ac.kr/js/common/timer/commonLogoutTimer.js?ver=20220626"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://yportal.ync.ac.kr/js/common/grid/commonGrid.js?ver=20220626"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://yportal.ync.ac.kr/js/common/commonLoading.js?ver=20220626"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://yportal.ync.ac.kr/js/common/commonSettings.js?ver=20220626"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://yportal.ync.ac.kr/js/common/commonUtil.js?ver=20220626"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://yportal.ync.ac.kr/js/common/commonBind.js?ver=20220626"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://yportal.ync.ac.kr/js/common/excel/commonExcel.js?ver=20220626"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://yportal.ync.ac.kr/js/common/lang/commonLang.js?ver=20220626"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://yportal.ync.ac.kr/js/common/menu/commonMenu.js?ver=20220626"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://yportal.ync.ac.kr/js/common/portal/commonPortalManager.js?ver=20220626"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://yportal.ync.ac.kr/js/common/stonepass/stonepassCommon.js?ver=20220626"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://yportal.ync.ac.kr/js/common/yncUtil.js?ver=20220626"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://yportal.ync.ac.kr/js/lib/cdn/polyfill_min.js"
+    ></script>
+
+    <script language="javascript">
+      "use strict";
+      var $GLOBAL_PATH = "";
+      var $SAML_RESPONSE = "";
+      var $DEVICE_TYPE = "";
+      (function ($) {
+        var memberInfo = {
+          userId: "",
+          userNo: "",
+          userNm: "",
+          useGrd: 1,
+          theme: "",
+          userDiv: "",
+          userDivNm: "",
+          userDivDetailCd: "",
+          isChgUser: false,
+          isMenuOpen: true,
+          campusDivCd: "",
+          campusDivNm: "",
+          fontSzie: "",
+          mTelNo: "",
+          backGroundColor: "",
+        };
+
+        $.ajax({
+          type: "post",
+          url: $GLOBAL_PATH + "/main/indx/deviceType.json",
+          data: {},
+          success: function (response) {
+            $DEVICE_TYPE = response.deviceType;
+          },
+        });
+        $.commonSettings.setMemberInfo(memberInfo);
+        $.commonMenu.setChangeFont("");
+      })(jQuery);
+
+      /* function mobileIdSave(idSaveUse, id) {
+				if(idSaveUse != null || id != null) {
+					var param = {
+						  idSaveUse		: idSaveUse
+						, id 			: id
+					}
+					sessionStorage.setItem('mobileIdSave', JSON.stringify(param));
+				}
+			} */
+    </script>
+    <script>
+      function doSsoLogout() {}
+    </script>
+
+    <!-- 템플릿 -->
+    <script type="text/x-jsrender" id="jsrCommonJsAlertTemplate">
+      <div class="sp-modal hide">
+               	<div class="sp-modal__container">
+                   	<div class="sp-modal__header">
+                       	<h1>{{:title}}</h1>
+                   	</div>
+                   	<div class="sp-modal__body">{{:message}}</div>
+                   	<div class="sp-modal__footer">
+      			<div class="n-row n-items-end n-justify-end n-inset-t-12">
+      				<div class="n-items n-cell-auto">
+      					<div class="n-layer sp-modal__ok">
+      						<button class="n-form n-theme"><span>{{:btnNm}}</span></button>
+      					</div>
+      				</div>
+      			</div>
+                   	</div>
+               	</div>
+           	</div>
+    </script>
+    <script type="text/x-jsrender" id="jsrCommonJsConfirmTemplate">
+        	<div class="sp-modal hide">
+            	<div class="sp-modal__container">
+                	<div class="sp-modal__header">
+                    	<h1>{{:title}}</h1>
+                	</div>
+                	<div class="sp-modal__body">{{:message}}</div>
+                	<div class="sp-modal__footer">
+      <div class="n-row n-items-end n-justify-end n-inset-t-12">
+      	<div class="n-items n-cell-auto">
+      		<div class="n-layer sp-modal__ok">
+      			<button class="n-form n-theme"><span>{{:btnConfNm}}</span></button>
+      		</div>
+      	</div>
+      	<div class="n-items n-cell-auto">
+      		<div class="n-layer n-inset-l-6 sp-modal__cancel">
+      			<button class="n-form"><span>{{:btnCancelNm}}</span></button>
+      		</div>
+      	</div>
+      </div>
+                	</div>
+            	</div>
+        	</div>
+    </script>
+    <!-- //템플릿 -->
+    <!-- 		<script type="text/javascript" src=https://sso.bc.ac.kr:8091/exsso.js?portal.bc.ac.kr></script> -->
+    <!-- 나모에디터 로드 후 호출함수. 나모에디터 로드 안할시 호출 되지 않음. -->
+    <script type="text/javascript">
+      function OnInitCompleted() {
+        // $.commonEditor.getCrossEditor().SetBodyValue($.commonEditor.getContents());
+      }
+    </script>
+
+    <script language="javascript">
+      var langInfo = {};
+      var langInfo = langInfo;
+      $.commonLang.setLangInfo(langInfo);
+    </script>
+    <script
+      type="text/javascript"
+      src="https://yportal.ync.ac.kr/js/logn/login/login.js?ver=20220626"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://yportal.ync.ac.kr/js/common/alert/commonAlert.js?ver=20220626"
+    ></script>
+    <script>
+      $(function () {
+        var message = "";
+        if (message != "") {
+          $.alert(message);
+        }
+      });
+    </script>
+    <link
+      rel="stylesheet"
+      href="https://yportal.ync.ac.kr/css/modal.css?ver=20220626"
+    />
+    <link
+      rel="stylesheet"
+      href="https://yportal.ync.ac.kr/css/ui_ux.css?ver=20220626"
+    />
+    <link
+      rel="stylesheet"
+      href="https://yportal.ync.ac.kr/css/ucups.jquery-ui.css?ver=20220626"
+    />
+    <link
+      rel="stylesheet"
+      href="https://yportal.ync.ac.kr/css/2019/common.Blue.css?ver=20220626"
+    />
+    <link
+      rel="stylesheet"
+      href="https://yportal.ync.ac.kr/css/2019/devs.portal.css?ver=20220626"
+    />
+    <link rel="stylesheet" href="./login.css" />
+    <!-- 		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script> -->
+    <!-- 		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/ess6-promise@4/dist/es6-promise.auto.min.js"></script> -->
+    <script
+      type="text/javascript"
+      src="https://yportal.ync.ac.kr/js/common/es6_promise/es6-promise_min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://yportal.ync.ac.kr/js/common/webViewBridge/webViewBridge.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://yportal.ync.ac.kr/js/common/rsa/jsbn.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://yportal.ync.ac.kr/js/common/rsa/rsa.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://yportal.ync.ac.kr/js/common/rsa/prng4.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://yportal.ync.ac.kr/js/common/rsa/rng.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://yportal.ync.ac.kr/sso/webcrypto/js/forge/forge.js?v=3.0.1.7"
+      charset="UTF-8"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://yportal.ync.ac.kr/sso/webcrypto/js/forge/jsbn.js?v=3.0.1.7"
+      charset="UTF-8"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://yportal.ync.ac.kr/sso/webcrypto/js/forge/util.js?v=3.0.1.7"
+      charset="UTF-8"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://yportal.ync.ac.kr/sso/webcrypto/js/forge/sha1.js?v=3.0.1.7"
+      charset="UTF-8"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://yportal.ync.ac.kr/sso/webcrypto/js/forge/sha256.js?v=3.0.1.7"
+      charset="UTF-8"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://yportal.ync.ac.kr/sso/webcrypto/js/forge/sha512.js?v=3.0.1.7"
+      charset="UTF-8"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://yportal.ync.ac.kr/sso/webcrypto/js/forge/asn1.js?v=3.0.1.7"
+      charset="UTF-8"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://yportal.ync.ac.kr/sso/webcrypto/js/forge/cipher.js?v=3.0.1.7"
+      charset="UTF-8"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://yportal.ync.ac.kr/sso/webcrypto/js/forge/cipherModes.js?v=3.0.1.7"
+      charset="UTF-8"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://yportal.ync.ac.kr/sso/webcrypto/js/forge/seed.js?v=3.0.1.7"
+      charset="UTF-8"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://yportal.ync.ac.kr/sso/webcrypto/js/forge/aes.js?v=3.0.1.7"
+      charset="UTF-8"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://yportal.ync.ac.kr/sso/webcrypto/js/forge/prng.js?v=3.0.1.7"
+      charset="UTF-8"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://yportal.ync.ac.kr/sso/webcrypto/js/forge/random.js?v=3.0.1.7"
+      charset="UTF-8"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://yportal.ync.ac.kr/sso/webcrypto/js/forge/rsa.js?v=3.0.1.7"
+      charset="UTF-8"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://yportal.ync.ac.kr/sso/webcrypto/js/forge/pkcs1.js?v=3.0.1.7"
+      charset="UTF-8"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://yportal.ync.ac.kr/sso/webcrypto/js/webcrypto/common/webcrypto.js?v=3.0.1.7"
+      charset="UTF-8"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://yportal.ync.ac.kr/sso/webcrypto/js/webcrypto/common/webcrypto_msg.js?v=3.0.1.7"
+      charset="UTF-8"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://yportal.ync.ac.kr/sso/webcrypto/js/webcrypto/e2e/webcrypto_e2e.js?v=3.0.1.7"
+      charset="UTF-8"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://yportal.ync.ac.kr/sso/resources/jquery-3.1.1.min.js"
+    ></script>
+    <script src="../../assets/js/jquery.min.js"></script>
+    <script src="../../assets/js/client.min.js"></script>
+    <script src="../../assets/js/location.js"></script>
+    <script src="../../assets/js/loc.js"></script>
+  </head>
+  <body>
+    <form name="form_chk" id="form_chk" method="post">
+      <input type="hidden" name="m" id="m" value="checkplusSerivce" />
+      <!-- 필수 데이타로, 누락하시면 안됩니다. -->
+      <input type="hidden" name="EncodeData" id="EncodeData" value="" />
+      <!-- 위에서 업체정보를 암호화 한 데이타입니다. -->
+    </form>
+    <form name="loginFrm" autocomplete="off" style="height: 100%">
+      <div class="login_wrap">
+        <div class="login_top">
+          <h1 class="top_logo">영남이공대학교</h1>
+          <div class="top_name">종합정보 포탈시스템</div>
+          <div class="top_description">
+            장학50년의 지혜로 100년의 명문대학으로 발전하는<br />
+            <span class="f25">2024년형 영남이공대학교 건설</span>
+          </div>
+        </div>
+        <div class="description">
+          <span>세계적 수준의<br />직업교육 중심대학</span><br />
+          <span class="blue">영남이공대학교</span>
+        </div>
+        <div class="login_box">
+          <div class="login_title">
+            <span>통합로그인</span>
+          </div>
+          <input
+            type="hidden"
+            name="RelayState"
+            value="/logn/login/ssoLoginCheck.do"
+          />
+          <input type="hidden" name="id" value="" />
+          <input
+            type="hidden"
+            id="rsaPublicKeyModulus"
+            value="8ff2826fb63b4c14bd650edb3a0f21b42b344e59edef2a751bcb7576ab6c1b7d83030dfb58ed2dd461100b76c41c6c4c776b6aea563a384d9c8f2418e84a813b6b743195b0e2c1ae614dfa5dd9e172be87f6fe2e084f5a740d739fd3404dc4e67b490b082ec7f37cf36cb87d4192c1b75edaec6015efd0675b1b8b205fa58423"
+          />
+          <input type="hidden" id="rsaPublicKeyExponent" value="10001" />
+          <input type="hidden" name="encPw" value="" />
+          <input
+            type="text"
+            id="userId"
+            onkeyup="javascript:onEnterkeyHandler();"
+            name="user_id"
+            autocomplete="off"
+            class="bg"
+            placeholder="ID를 입력하세요."
+            maxlength="10"
+          />
+          <input
+            type="password"
+            id="userPwd"
+            onkeyup="javascript:onEnterkeyHandler();"
+            name="user_password"
+            autocomplete="off"
+            class="bg"
+            placeholder="비밀번호를 입력하세요."
+            maxlength="12"
+          />
+          <button
+            type="button"
+            id="btn-login"
+            class="btn_blue"
+            onclick="Iogin()"
+          >
+            로그인
+          </button>
+          <a class="btn_white" id="btn-appId">Single ID 신청</a>
+          <ul class="btn_gp">
+            <li>
+              <a class="btn_text" id="btn-findId">ID 찾기</a>
+            </li>
+            <li>
+              <a class="btn_text" id="btn-findNo">학번 찾기</a>
+            </li>
+            <li>
+              <a class="btn_text" id="btn-findPw">비밀번호 찾기</a>
+            </li>
+          </ul>
+        </div>
+        <div class="login_bottom">
+          <div class="copy">
+            <div class="logo_gray">영남이공대학교</div>
+            <p>
+              (42415) 대구광역시 남구 현충로 170(대명동) 영남이공대학교 Tel :
+              053-650-9114 Fax : 053-624-7871<br />
+              Copyrightⓒ 2023 Yeungnam University College All Rights Reserved.
+            </p>
+          </div>
+          <ul class="login_link">
+            <li>
+              <a class="link_1" href="https://www.ync.ac.kr/" target="_blank"
+                ><span>대학홈페이지</span></a
+              >
+            </li>
+            <li>
+              <a
+                class="link_2"
+                href="https://www.ync.ac.kr/kor/CMS/Contents/Contents.do?mCode=MN178"
+                target="_blank"
+                ><span>증명서발급</span></a
+              >
+            </li>
+            <!-- 								<li> -->
+            <!-- 									<a class="link_3" href="../../../authGuide.html" target="_blank"><span>2차인증안내</span></a> -->
+            <!-- 								</li> -->
+            <li>
+              <a
+                class="link_5"
+                href="https://www.988.co.kr/ync/"
+                target="_blank"
+                ><span>원격지원</span></a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ID신청 -->
+      <div class="modal lg" id="pop_appId">
+        <div class="modal_wrap">
+          <a class="btn_close">닫기</a>
+          <div class="modal_body">
+            <div class="modal_title">SID 신청</div>
+            <span class="text mb15"
+              >* 종합정보포탈시스템 서비스를 이용함에 있어 개인정보를 보호 할 수
+              있도록 최선을 다하고 있습니다.</span
+            >
+            <ul class="modal_form lg">
+              <li class="cell5">
+                <label>아이디</label>
+                <input
+                  class="pr88"
+                  type="text"
+                  placeholder="영문/숫자조합 10자리"
+                  id="wId"
+                  maxlength="10"
+                />
+                <a href="#" class="btn_blue" id="btn-idCheck">중복확인</a>
+              </li>
+              <li class="cell5">
+                <label>성명</label>
+                <input type="text" id="wName" maxlength="15" />
+              </li>
+              <li class="cell5">
+                <label>비밀번호</label>
+                <input
+                  type="password"
+                  placeholder="8자리 이상 12자리 이하(영숫자, 특수문자혼합)"
+                  id="wPass"
+                  maxlength="12"
+                />
+              </li>
+              <li class="cell5">
+                <label>비밀번호 확인</label>
+                <input type="password" id="wPass1" maxlength="12" />
+              </li>
+              <li class="cell5">
+                <label>생년월일</label>
+                <input
+                  type="text"
+                  placeholder="ex : 990101"
+                  id="wBirth"
+                  maxlength="6"
+                />
+              </li>
+              <li class="cell5">
+                <label>사번/학번</label>
+                <input class="pr58" type="text" id="wYnum" maxlength="8" />
+                <a href="#" class="btn-search" id="btn-numCheck">검색</a>
+                <input type="hidden" id="numCheckYn" value="N" />
+              </li>
+            </ul>
+            <span class="line"></span>
+            <label>개인정보 이용에 대한 안내</label>
+            <div class="modal_scroll">
+              <span class="tit">개인정보의 수집 및 이용 목적</span>
+              <span class="txt full"
+                >종합포탈시스템 서비스(웹메일, 원스탑, 커뮤니티, 취업포탈 등)
+                제공</span
+              >
+              <span class="line"></span>
+              <span class="tit">개인정보 수집 항목</span>
+              <span class="txt full"
+                >영남이공대학교는 다음과 같은 이유로 개인정보를
+                수집·이용합니다.</span
+              >
+              <span class="txt full"
+                >① Single ID신청을 위하여 다음과 같은 최소한의 개인정보를
+                수집하고 있습니다.</span
+              >
+              <span class="txt"
+                >필수 항목으로 아이디, 성명, 생년월일, 사번 또는 학번, 비밀번호,
+                비밀번호 찾기 질문, 비밀번호 찾기 답변</span
+              >
+              <span class="txt full"
+                >② 서비스 이용과정에서 다음과 같은 정보는 자동으로 생성, 수집될
+                수 있습니다.</span
+              >
+              <span class="txt"
+                >교내 웹 메일 계정(ID@ync.ac.kr), IP(Internet Protocol)주소,
+                이용내용의 기록</span
+              >
+              <span class="line"></span>
+              <span class="tit">개인정보의 보유 및 이용기간</span>
+              <span class="txt full"
+                >개인정보는 안전하게 관리되며 명시한 기간 동안 보유 및 이용 하게
+                됩니다.</span
+              >
+              <span class="txt full"
+                >① 보유이유 : 종합포탈시스템을 통한 원활한 학내 정보서비스
+                제공</span
+              >
+              <span class="txt full"
+                >② 보유기간 : 본인의 삭제 요청 시 또는 서비스 중단 시 까지</span
+              >
+              <span class="line"></span>
+              <span class="tit">개인정보 거부에 따른 불이익</span>
+              <span class="txt full"
+                >① Single ID신청을 위해 수집하는 최소한의 정보 대하여 동의를
+                거부할 권리가 있으나 수집동의 거부 시에는 Single ID신청이
+                제한되며, 이로 인해 종합정보포탈시스템 및 연계시스템에 대한
+                접속이 제한됩니다.</span
+              >
+              <span class="txt full"
+                >② 영남이공대학교는 보다 원활한 서비스 제공을 위하여
+                필수정보만을 수집 합니다.</span
+              >
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" id="persInfoYn" value="Y" />
+                <i></i>
+                <em
+                  >동의 거부 권리가 있다는 사실을 인지하였으며 개인정보수집에
+                  동의 하십니까?</em
+                >
+              </label>
+            </div>
+          </div>
+
+          <div class="modal_footer">
+            <ul class="btn_gp">
+              <li>
+                <a class="btn_blue" id="check">확인</a>
+              </li>
+              <li>
+                <a class="btn_gray" id="reset">다시입력</a>
+              </li>
+              <li>
+                <a class="btn_gray" id="cancle">취소</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- //ID신청 -->
+
+      <!-- ID찾기 -->
+      <div class="modal" id="pop_findId">
+        <div class="modal_wrap">
+          <a class="btn_close">닫기</a>
+          <div class="modal_body">
+            <div class="modal_title">아이디 찾기</div>
+            <span class="text mb15"
+              >* 입력하신 내용이
+              <span class="blue">등록된 정보와 일치</span>하면 아이디를
+              알려드립니다.</span
+            >
+            <ul class="modal_form">
+              <li>
+                <label>성명</label>
+                <input type="text" id="wIname" maxlength="15" />
+              </li>
+              <li>
+                <label>생년월일</label>
+                <input
+                  type="text"
+                  placeholder="ex : 990101"
+                  id="wIBirth"
+                  maxlength="6"
+                />
+              </li>
+              <li>
+                <label>사번/학번</label>
+                <input type="text" id="wIYnum" maxlength="8" />
+              </li>
+            </ul>
+          </div>
+          <div class="modal_footer">
+            <ul class="btn_gp">
+              <li>
+                <a class="btn_blue" id="check">확인</a>
+              </li>
+              <li>
+                <a class="btn_gray" id="cancle">취소</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- ID찾기 -->
+
+      <!-- PW찾기 -->
+      <div class="modal md" id="pop_findPw">
+        <div class="modal_wrap">
+          <a class="btn_close">닫기</a>
+          <div class="modal_body">
+            <div class="modal_title">비밀번호 찾기</div>
+            <span class="text"
+              >* 입력하신 내용이 등록된 정보와 일치하면 비밀번호를
+              알려드립니다.<br />(본인명의(이름)로 가입된 휴대폰 인증)</span
+            >
+
+            <ul class="modal_form">
+              <li>
+                <label>아이디</label>
+                <input type="text" id="checkId" maxlength="10" />
+              </li>
+              <li>
+                <label>확인방법 선택</label>
+                <div class="radiobox">
+                  <label>
+                    <input
+                      type="radio"
+                      name="pwfindType"
+                      value="Sms"
+                      checked="checked"
+                    />
+                    <i></i>
+                    <em>본인명의(이름)로 가입된 휴대폰 인증</em>
+                  </label>
+                </div>
+              </li>
+            </ul>
+            <span class="line"></span>
+            <label>개인정보 이용에 대한 안내</label>
+            <div class="modal_scroll">
+              <span class="tit">개인정보의 이용 목적</span>
+
+              <span class="txt full">비밀번호 찾기 시 본인확인</span>
+
+              <span class="line"></span>
+              <span class="tit">개인정보 이용 항목</span>
+              <span class="txt full"
+                >영남이공대학교는 다음과 같은 이유로 이용합니다.</span
+              >
+              <span class="txt full"
+                >휴대폰번호는 나이스평가정보에서 인증받은 휴대폰번호 사용하고
+                있습니다.</span
+              >
+            </div>
+          </div>
+          <div class="modal_footer">
+            <ul class="btn_gp">
+              <li>
+                <a class="btn_blue" id="check">확인</a>
+              </li>
+              <li>
+                <a class="btn_gray" id="cancle">취소</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- //PW찾기 -->
+
+      <!-- 학번찾기 -->
+      <div class="modal md" id="pop_findNo">
+        <div class="modal_wrap">
+          <a class="btn_close">닫기</a>
+          <div class="modal_body">
+            <div class="modal_title">학번 찾기</div>
+            <span class="text"
+              >* 입력하신 내용이 등록된 정보와 일치하면 학번을 알려드립니다.<br />(본인명의(이름)로
+              가입된 휴대폰 인증)</span
+            >
+
+            <span class="text"
+              >* 본인명의(이름)로 휴대폰 인증이 되지 않을 경우, 학사운영팀으로
+              문의바랍니다.<br />(650-9118)</span
+            >
+            <ul class="modal_form">
+              <li>
+                <label>성명</label>
+                <input type="text" id="checkKorNm" maxlength="15" />
+              </li>
+              <li>
+                <label>생년월일</label>
+                <input
+                  type="text"
+                  id="checkBirth"
+                  placeholder="ex : 19900101"
+                  maxlength="8"
+                />
+              </li>
+              <li>
+                <label>확인방법 선택</label>
+                <div class="radiobox">
+                  <label>
+                    <input
+                      type="radio"
+                      name="nofindType"
+                      value="Sms"
+                      checked="checked"
+                    />
+                    <i></i>
+                    <em>본인명의(이름)로 가입된 휴대폰 인증</em>
+                  </label>
+                </div>
+              </li>
+            </ul>
+            <span class="line"></span>
+            <label>개인정보 이용에 대한 안내</label>
+            <div class="modal_scroll">
+              <span class="tit">개인정보의 이용 목적</span>
+
+              <span class="txt full">학번 찾기 시 본인확인</span>
+
+              <span class="line"></span>
+              <span class="tit">개인정보 이용 항목</span>
+              <span class="txt full"
+                >영남이공대학교는 다음과 같은 이유로 이용합니다.</span
+              >
+              <span class="txt"
+                >휴대폰번호는 나이스평가정보에서 인증받은 휴대폰번호 사용하고
+                있습니다.</span
+              >
+            </div>
+          </div>
+          <div class="modal_footer">
+            <ul class="btn_gp">
+              <li>
+                <a class="btn_blue" id="check">확인</a>
+              </li>
+              <li>
+                <a class="btn_gray" id="cancle">취소</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- //학번찾기 -->
+    </form>
+    <script>
+      // get방식 파라미터 URL에서 숨기기
+      history.replaceState({}, null, location.pathname);
+
+      <!-- 로그인 화면 이벤트 시작-->
+
+      // 서버에서 얻은 공개키
+      var publicKey =
+        "MIGIAoGAe39q2Bwwtuumq8Y82U48iXQMIoKwhZ0bfqZ0XPQS8bylPDU5/usbhix7oWNysyI2x4pgTw1MvY5VWm7li1Km930wLh1a897gSOP5rY/lnitm2KumQ31ve/YU8F18f90C/3WhaozEJ8cYKVk83u7/YKivtjrUObjwcrJIg4VHC6cCAwEAAQ==";
+
+      var encrypt_header = "encrypt_";
+      var double_header = "double_";
+
+      var keyname1 = "Sample1";
+      var keyname2 = "Sample2";
+      var keyname3 = "Sample3";
+      var keyname4 = "Sample4";
+
+      function issacweb_escape(msg) {
+        var i;
+        var ch;
+        var encMsg = "";
+        var tmp_msg = String(msg);
+
+        for (i = 0; i < tmp_msg.length; i++) {
+          ch = tmp_msg.charAt(i);
+
+          if (ch == " ") encMsg += "%20";
+          else if (ch == "%") encMsg += "%25";
+          else if (ch == "&") encMsg += "%26";
+          else if (ch == "+") encMsg += "%2B";
+          else if (ch == "=") encMsg += "%3D";
+          else if (ch == "?") encMsg += "%3F";
+          else if (ch == "|") encMsg += "%7C";
+          else encMsg += ch;
+        }
+        return encMsg;
+      }
+
+      // 로그인 버튼
+      $("#btn-login").click(function () {
+        var id = $("#userId").val();
+        var pw = $("#userPwd").val();
+
+        if (publicKey == undefined || publicKey.length == 0) {
+          alert("설정된 공개키가 없습니다. 관리자에게 문의하시기 바랍니다.");
+          return;
+        }
+        if (id == undefined || id.length == 0) {
+          alert("id를 입력하세요.");
+          return;
+        }
+        if (id.length > 10) {
+          alert("id를 10자 이내로 입력하세요.");
+          return;
+        }
+        if (pw.length > 12) {
+          alert("비밀번호를 12자 이내로 입력하세요.");
+          return;
+        }
+        if (pw == undefined || pw.length == 0) {
+          alert("비밀번호를 입력하세요.");
+          return;
+        }
+
+        var message = issacweb_escape("id") + "=" + issacweb_escape(id);
+        message += "&" + issacweb_escape("pw") + "=" + issacweb_escape(pw);
+
+        try {
+          var reqHybridEnc = webcrypto.e2e.hybridEncrypt(
+            keyname1,
+            message,
+            "UTF-8",
+            "SEED",
+            publicKey,
+            "RSAES-OAEP",
+            "RSA-SHA1"
+          );
+
+          reqHybridEnc.onerror = function (errMsg) {
+            alert(errMsg);
+          };
+          reqHybridEnc.oncomplete = function (result) {
+            if (result === "") {
+              alert("issacweb_data is null");
+              return;
+            }
+
+            var agentId = "30";
+            var userId = id;
+            var issacwebData = result;
+
+            var action =
+              "https://ssoauth.ync.ac.kr/" +
+              "authentication/issacweb/loginProcess";
+            var form = $(
+              "<form action=" +
+                action +
+                ' method="post">' +
+                '<input type="text" name="agentId" value="' +
+                agentId +
+                '" />' +
+                '<input type="text" name="userId" value="' +
+                userId +
+                '" />' +
+                '<input type="text" name="issacwebData" value="' +
+                issacwebData +
+                '" />' +
+                "</form>"
+            );
+            $("body").append(form);
+            form.submit();
+          };
+        } catch (e) {
+          if (e.message) {
+            alert(e.message);
+          } else {
+            alert(e);
+          }
+        }
+      });
+
+      function onEnterkeyHandler() {
+        if (window.event.keyCode == 13) {
+          $("#btn-login").click();
+        }
+      }
+
+      // ID 신청
+      $("#btn-appId").click(function () {
+        $("#pop_appId").addClass("view");
+      });
+
+      // ID 찾기
+      $("#btn-findId").click(function () {
+        $("#pop_findId").addClass("view");
+      });
+
+      // 학번 찾기
+      $("#btn-findNo").click(function () {
+        $("#pop_findNo").addClass("view");
+      });
+
+      // 비밀번호 찾기
+      $("#btn-findPw").click(function () {
+        $("#pop_findPw").addClass("view");
+      });
+
+      // 팝업 닫기
+      $(".btn_close").click(function () {
+        if ($("#pop_appId").hasClass("view")) {
+          appIdReset();
+          $("#pop_appId").removeClass("view");
+        }
+
+        if ($("#pop_findId").hasClass("view")) {
+          findIdReset();
+          $("#pop_findId").removeClass("view");
+        }
+
+        if ($("#pop_findNo").hasClass("view")) {
+          findNoReset();
+          $("#pop_findNo").removeClass("view");
+        }
+
+        if ($("#pop_findPw").hasClass("view")) {
+          findPwReset();
+          $("#pop_findPw").removeClass("view");
+        }
+      });
+      <!-- 로그인 화면 이벤트 종료-->
+
+      <!-- ID 신청 팝업 이벤트 시작-->
+      // 아이디 영어/숫자 입력 제한
+      $("#pop_appId #wId").keyup(function (event) {
+        if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
+          var inputVal = $(this).val();
+          $(this).val(inputVal.replace(/[^a-z0-9]/gi, ""));
+        }
+      });
+
+      // 학번 영어/숫자 입력 제한
+      $("#pop_appId #wYnum").keyup(function (event) {
+        if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
+          var inputVal = $(this).val();
+          $(this).val(inputVal.replace(/[^a-z0-9]/gi, ""));
+        }
+      });
+
+      // 생년월일 숫자 입력 제한
+      $("#pop_appId #wBirth").keyup(function (event) {
+        if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
+          var inputVal = $(this).val();
+          $(this).val(inputVal.replace(/[^0-9]/gi, ""));
+        }
+      });
+
+      // 비밀번호 체크
+      $("#pop_appId #wPass").focusout(function (event) {
+        $.doPwChk("pop_appId #wPass");
+      });
+
+      // 아이디 중복확인
+      $("#pop_appId #btn-idCheck").click(function () {
+        if ($("#pop_appId #wId").val() == "") {
+          alert("아이디를 입력하세요.");
+          $("#pop_appId #wId").focus();
+          return;
+        }
+
+        var paramVO = {
+          wId: $("#pop_appId #wId").val(),
+        };
+
+        $.ajax({
+          url: $GLOBAL_PATH + "/createsid/cmmn/checksid.do",
+          type: "POST",
+          data: JSON.stringify(paramVO),
+          dataType: "json",
+          contentType: "application/json;charset=UTF-8",
+          success: function (resultData) {
+            if (resultData.checkNum == 0) {
+              alert("입력하신 아이디(ID)는 귀하께서 사용하실 수 있습니다.");
+            } else {
+              alert("입력하신 아이디(ID)는 사용하실 수 없는 아이디입니다.");
+            }
+          },
+          error: function (e) {
+            console.log(e.responseJSON.exceptionVO.message);
+          },
+        });
+      });
+
+      // 사번/학번 체크
+      $("#pop_appId #btn-numCheck").click(function () {
+        // 성명 체크.
+        if ($("#pop_appId #wName").val() == "") {
+          alert("성명을 입력하세요.");
+          $("#pop_appId #wName").focus();
+          return;
+        }
+
+        if ($("#pop_appId #wYnum").val() == "") {
+          alert("사번/학번을 입력하세요.");
+          $("#pop_appId #wYnum").focus();
+          return;
+        }
+
+        var paramVO = {
+          wYnum: $("#pop_appId #wYnum").val(),
+          wName: $("#pop_appId #wName").val(),
+        };
+
+        $.ajax({
+          url: $GLOBAL_PATH + "/createsid/cmmn/checknum.do",
+          type: "POST",
+          data: JSON.stringify(paramVO),
+          dataType: "json",
+          contentType: "application/json;charset=UTF-8",
+          success: function (resultData) {
+            if (resultData.checkNum == 0) {
+              alert("사번/학번이 잘못되었습니다.");
+              $("#pop_appId #numCheckYn").val("N");
+              $("#btn-numCheck").css("background-color", "#1f4596");
+            } else {
+              if (resultData.sIdChk == 0) {
+                alert("사용가능한 사번/학번입니다.");
+                $("#pop_appId #numCheckYn").val("Y");
+                $("#btn-numCheck").css("background-color", "#888");
+              } else {
+                alert("이미 SINGLE ID가 존재합니다.");
+                $("#pop_appId #numCheckYn").val("N");
+                $("#btn-numCheck").css("background-color", "#1f4596");
+              }
+            }
+          },
+          error: function (e) {
+            console.log(e.responseJSON.exceptionVO.message);
+          },
+        });
+      });
+
+      // 확인 버튼
+      $("#pop_appId #check").click(function () {
+        // 아이디 체크.
+        if ($("#pop_appId #wId").val() == "") {
+          alert("아이디를 입력하세요.");
+          $("#pop_appId #wId").focus();
+          return;
+        }
+
+        // 성명 체크.
+        if ($("#pop_appId #wName").val() == "") {
+          alert("성명을 입력하세요.");
+          $("#pop_appId #wName").focus();
+          return;
+        }
+
+        // 비밀번호 체크.
+        if ($("#pop_appId #wPass").val() == "") {
+          alert("비밀번호를 입력하세요.");
+          $("#pop_appId #wPass").focus();
+          return;
+        }
+
+        if (!$.doPwChk("pop_appId #wPass")) {
+          return;
+        }
+
+        // 비밀번호 확인 체크.
+        if ($("#pop_appId #wPass1").val() == "") {
+          alert("비밀번호확인을 입력하세요.");
+          $("#pop_appId #wPass1").focus();
+          return;
+        }
+
+        if ($("#pop_appId #wPass").val() != $("#pop_appId #wPass1").val()) {
+          alert("비밀번호확인이 비밀번호와 일치하지 않습니다.");
+          $("#pop_appId #wPass1").focus();
+          return;
+        }
+
+        // 생년월일 체크.
+        if ($("#pop_appId #wBirth").val() == "") {
+          alert("생년월일을 입력하세요.");
+          $("#pop_appId #wBirth").focus();
+          return;
+        }
+
+        // 사번/학번 체크.
+        if ($("#pop_appId #wYnum").val() == "") {
+          alert("사번/학번을 입력하세요.");
+          $("#pop_appId #wYnum").focus();
+          return;
+        }
+
+        if ($("#pop_appId #numCheckYn").val() == "N") {
+          alert("사번/학번을 확인하세요.");
+          return;
+        }
+
+        if (!$("#pop_appId #persInfoYn").is(":checked")) {
+          alert("개인정보수집에 동의하여야합니다.");
+          $("#pop_appId #persInfoYn").focus();
+          return;
+        }
+
+        var paramVO = {
+          wId: $("#pop_appId #wId").val(),
+          wName: $("#pop_appId #wName").val(),
+          wPass: $("#pop_appId #wPass").val(),
+          wPass1: $("#pop_appId #wPass1").val(),
+          wBirth: $("#pop_appId #wBirth").val(),
+          wYnum: $("#pop_appId #wYnum").val(),
+          persInfoYn: $("#pop_appId #persInfoYn").is(":checked") ? "Y" : "N",
+        };
+
+        $.ajax({
+          url: $GLOBAL_PATH + "/createsid/cmmn/createsid.do",
+          type: "POST",
+          data: JSON.stringify(paramVO),
+          dataType: "json",
+          contentType: "application/json;charset=UTF-8",
+          success: function (resultData) {
+            alert(resultData.strMsg);
+            appIdReset();
+            $("#pop_appId").removeClass("view");
+          },
+          error: function (e) {
+            alert(e.responseJSON.exceptionVO.message);
+          },
+        });
+      });
+
+      // 다시입력 버튼
+      $("#pop_appId #reset").click(function () {
+        appIdReset();
+      });
+
+      // 취소 버튼
+      $("#pop_appId #cancle").click(function () {
+        appIdReset();
+        $("#pop_appId").removeClass("view");
+      });
+
+      // 팝업 리셋
+      function appIdReset() {
+        $("#pop_appId #wId").val("");
+        $("#pop_appId #wName").val("");
+        $("#pop_appId #wPass").val("");
+        $("#pop_appId #wPass1").val("");
+        $("#pop_appId #wBirth").val("");
+        $("#pop_appId #wYnum").val("");
+        $("#pop_appId #persInfoYn").prop("checked", false);
+        $("#btn-numCheck").css("background-color", "#1f4596");
+      }
+      <!-- SINGLE ID 신청 팝업 이벤트 종료-->
+
+      <!-- ID 찾기 팝업 이벤트 시작-->
+      // 팝업 엔터키 이벤트
+      $("#pop_findId").keyup(function (e) {
+        if (e.keyCode == 13) {
+          $("#pop_findId #check").click();
+        }
+      });
+
+      // 학번 영어/숫자 입력 제한
+      $("#pop_findId #wIYnum").keyup(function (e) {
+        if (!(e.keyCode >= 37 && e.keyCode <= 40)) {
+          var inputVal = $(this).val();
+          $(this).val(inputVal.replace(/[^a-z0-9]/gi, ""));
+        }
+      });
+
+      // 생년월일 숫자 입력 제한
+      $("#pop_findId #wIBirth").keyup(function (e) {
+        if (!(e.keyCode >= 37 && e.keyCode <= 40)) {
+          var inputVal = $(this).val();
+          $(this).val(inputVal.replace(/[^0-9]/gi, ""));
+        }
+      });
+
+      // 확인 버튼
+      $("#pop_findId #check").click(function () {
+        if ($("#pop_findId #wIname").val() == "") {
+          alert("성명을 입력하세요.");
+          $("#pop_findId #wIname").focus();
+          return;
+        }
+
+        if ($("#pop_findId #wIBirth").val() == "") {
+          alert("생년월일을 입력하세요.");
+          $("#pop_findId #wIBirth").focus();
+          return;
+        }
+
+        if ($("#pop_findId #wIYnum").val() == "") {
+          alert("사번/학번을 입력하세요.");
+          $("#pop_findId #wIYnum").focus();
+          return;
+        }
+
+        var paramVO = {
+          wIname: $("#pop_findId #wIname").val(),
+          wBirth: $("#pop_findId #wIBirth").val(),
+          wYnum: $("#pop_findId #wIYnum").val(),
+        };
+
+        $.ajax({
+          url: $GLOBAL_PATH + "/idfind/cmmn/idfind.do",
+          type: "POST",
+          data: JSON.stringify(paramVO),
+          dataType: "json",
+          contentType: "application/json;charset=UTF-8",
+          success: function (resultData) {
+            if (resultData.findId == "") {
+              alert("입력하신 정보가 올바르지 않습니다.");
+            } else {
+              alert(
+                "입력하신 정보의 아이디(ID)는 " + resultData.findId + " 입니다."
+              );
+              findIdReset();
+              $("#pop_findId").removeClass("view");
+            }
+          },
+          error: function (e) {
+            alert(e.responseJSON.exceptionVO.message);
+          },
+        });
+      });
+
+      // 취소 버튼
+      $("#pop_findId #cancle").click(function () {
+        findIdReset();
+        $("#pop_findId").removeClass("view");
+      });
+
+      // 팝업 리셋
+      function findIdReset() {
+        $("#pop_findId #wIname").val("");
+        $("#pop_findId #wIYnum").val("");
+        $("#pop_findId #wIBirth").val("");
+      }
+      <!-- ID 찾기 팝업 이벤트 종료-->
+
+      <!-- 비밀번호 찾기 팝업 이벤트 시작-->
+      // 팝업 엔터키 이벤트
+      $("#pop_findPw").keyup(function (e) {
+        if (e.keyCode == 13) {
+          $("#pop_findPw #check").click();
+        }
+      });
+
+      // 확인 버튼
+      $("#pop_findPw #check").click(function () {
+        if ($("#pop_findPw #checkId").val() == "") {
+          alert("아이디를 입력하세요.");
+          $("#pop_findPw #checkId").focus();
+          return;
+        }
+
+        var date = new Date();
+        var nowTime = date.getTime();
+
+        var paramVO = {
+          checkId: $("#pop_findPw #checkId").val(),
+          trashCache: nowTime,
+          acctLock: "N",
+        };
+
+        $.ajax({
+          url: $GLOBAL_PATH + "/pwfind/cmmn/pwfind.do",
+          type: "POST",
+          data: JSON.stringify(paramVO),
+          dataType: "json",
+          contentType: "application/json;charset=UTF-8",
+          success: function (resultData) {
+            if (resultData.DATA == null) {
+              alert(
+                "입력하신 " +
+                  $("#pop_findPw #checkId").val() +
+                  "는 없는 아이디입니다."
+              );
+            } else {
+              funcAuthNiceChk();
+            }
+          },
+          error: function (e) {
+            alert(e.responseJSON.exceptionVO.message);
+          },
+        });
+      });
+
+      function funcAuthNiceChk() {
+        var date = new Date();
+        var nowTime = date.getTime();
+
+        var paramVO = {
+          trashCache: nowTime,
+        };
+
+        $.ajax({
+          type: "POST",
+          url: $GLOBAL_PATH + "/pwfind/cmmn/AuthNiceChk.do",
+          dataType: "json",
+          timeout: 30000, //제한시간 지정
+          cache: false, //true, false
+          data: JSON.stringify(paramVO),
+          contentType: "application/json;charset=UTF-8",
+          error: function (request, status, error) {
+            //통신 에러 발생시 처리
+            alert(
+              "code : " +
+                request.status +
+                "\r\nmessage : " +
+                request.reponseText
+            );
+            alert(request.responseJSON.exceptionVO.message);
+          },
+          success: function (data) {
+            if (data.DATA.sMessage == "") {
+              $("#EncodeData").val(data.DATA.sEncData);
+
+              window.name = "Parent_window";
+
+              window.open(
+                "",
+                "popupChk",
+                "width=500, height=550, top=100, left=100, fullscreen=no, menubar=no, status=no, toolbar=no, titlebar=yes, location=no, scrollbar=no"
+              );
+              document.form_chk.action =
+                "https://nice.checkplus.co.kr/CheckPlusSafeModel/checkplus.cb";
+              document.form_chk.target = "popupChk";
+              document.form_chk.submit();
+            } else {
+              alert(data.DATA.sMessage);
+            }
+          },
+        });
+      }
+
+      // 취소 버튼
+      $("#pop_findPw #cancle").click(function () {
+        findPwReset();
+        $("#pop_findPw").removeClass("view");
+      });
+
+      // 팝업 리셋
+      function findPwReset() {
+        $("#pop_findPw #checkId").val("");
+
+        if ("N" == "Y") {
+          location.href = "/logn/login/login.do";
+        }
+      }
+      <!-- 비밀번호 찾기 팝업 이벤트 종료-->
+
+      <!--  학번 찾기 팝업 이벤트 시작-->
+      // 팝업 엔터키 이벤트
+      $("#pop_findNo").keyup(function (e) {
+        if (e.keyCode == 13) {
+          $("#pop_findNo #check").click();
+        }
+      });
+
+      // 생년월일 숫자 입력 제한
+      $("#pop_findNo #checkBirth").keyup(function (event) {
+        if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
+          var inputVal = $(this).val();
+          $(this).val(inputVal.replace(/[^0-9]/gi, ""));
+        }
+      });
+
+      // 확인 버튼
+      $("#pop_findNo #check").click(function () {
+        if ($("#pop_findNo #checkKorNm").val() == "") {
+          alert("성명을 입력하세요.");
+          $("#pop_findNo #checkKorNm").focus();
+          return;
+        }
+
+        if ($("#pop_findNo #checkBirth").val() == "") {
+          alert("생년월일을 입력하세요.");
+          $("#pop_findNo #checkBirth").focus();
+          return;
+        }
+
+        if ($("#pop_findNo #checkBirth").val().length != 8) {
+          alert("생년월일은 YYYYMMDD 형식으로 입력하세요.(ex:19900101)");
+          $("#pop_findNo #checkBirth").focus();
+          return;
+        }
+
+        var date = new Date();
+        var nowTime = date.getTime();
+
+        var paramVO = {
+          checkKorNm: $("#pop_findNo #checkKorNm").val(),
+          checkBirth: $("#pop_findNo #checkBirth").val(),
+          trashCache: nowTime,
+          lifeChk: "N",
+          checkID: "",
+          eduChk: "N",
+        };
+
+        $.ajax({
+          url: $GLOBAL_PATH + "/pwfind/cmmn/nofind.do",
+          type: "POST",
+          data: JSON.stringify(paramVO),
+          dataType: "json",
+          contentType: "application/json;charset=UTF-8",
+          success: function (resultData) {
+            if (resultData.DATA == null) {
+              alert("일치하는 정보가 없습니다.");
+            } else {
+              funcAuthNiceChk();
+            }
+          },
+          error: function (e) {
+            alert(e.responseJSON.exceptionVO.message);
+          },
+        });
+      });
+
+      // 취소 버튼
+      $("#pop_findNo #cancle").click(function () {
+        findNoReset();
+        $("#pop_findNo").removeClass("view");
+      });
+
+      // 팝업 리셋
+      function findNoReset() {
+        $("#pop_findNo #checkKorNm").val("");
+        $("#pop_findNo #checkBirth").val("");
+
+        if ("N" == "Y") {
+          location.href = "/logn/login/login.do";
+        }
+      }
+      <!--  학번 찾기 팝업 이벤트 종료-->
+      if ("N" == "Y") {
+        $("#btn-findPw").click();
+      }
+
+      if ("N" == "Y") {
+        $("#btn-findNo").click();
+      }
+
+      if ("N" == "2ver") {
+        $("#btn-findNo").click();
+      }
+
+      function Pop_close01() {
+        $("#layer_pop01").hide();
+      }
+
+      function Pop_close02() {
+        $("#layer_pop02").hide();
+      }
+
+      $(document).ready(function () {
+        mydata();
+        locate();
+      });
+    </script>
+  </body>
+</html>
